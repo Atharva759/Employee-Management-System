@@ -7,8 +7,6 @@ target/
 # Spring Boot config
 .env
 
-/backend/src/main/resources/application.properties
-
 
 ### STS ###
 .apt_generated
