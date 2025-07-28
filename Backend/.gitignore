@@ -5,8 +5,7 @@ target/
 !**/src/test/**/target/
 
 # Spring Boot config
-application.properties
-application.yml
+.env
 
 
 ### STS ###
