@@ -10,28 +10,48 @@ const Home = () => {
   });
 
   const [users, setUsers] = useState([]);
+  const [editing,setediting] = useState(false);
+  const [editId,seteditId] = useState(null);
 
   const handlesubmit = async(e) => {
     e.preventDefault();
     
-    await createUser(form)
+  if(editing){
+    await updateUser(editId,form)
       .then(()=>{
+        setediting(false);
+        seteditId(null);
         setform({name:"",email:"",company:""});
         showdata();
       })
       .catch((err)=> console.error(err));
-    console.log(form);
+  }else{
+    await createUser(form)
+    .then(()=>{
+        setform({name:"",email:"",company:""});
+        showdata();
+      })
+      .catch((err)=> console.error(err));
+    }
   };
 
   const showdata = () =>{
-    getUsers().then(setUsers);
+    getUsers().then(users => {
+      const sorteddata = users.sort((a,b)=> a.name.localeCompare(b.name));
+      setUsers(sorteddata);
+    });
   }
 
   useEffect(() => {
     showdata();
   }, []);
 
-  const editUser = () => {};
+  const editUser = (id,user) => {
+    setform({...user})
+    console.log(form);
+    setediting(true);
+    seteditId(id);
+  };
 
   const deletedata = (id,user) =>{
     deleteUser(id,user)
@@ -58,7 +78,7 @@ const Home = () => {
             <input
             value={form.email}
             onChange={(e)=> setform({...form,email:e.target.value})}
-              className="p-2 border-gray-700 border-2 rounded-md "
+              className="p-2  border-gray-700 border-2 rounded-md "
               type="email"
               placeholder="Enter your email"
             />
@@ -70,8 +90,8 @@ const Home = () => {
               placeholder="Enter your company"
             />
             <input type="submit"
-              className="p-3 bg-gray-700 text-white font-semibold rounded-md"
-              value="Save"
+              className="p-3 bg-gray-700 text-white font-semibold rounded-md cursor-pointer"
+              value={editing ? "Update":"Save"}
             />
               
             
@@ -101,14 +121,14 @@ const Home = () => {
                   <td className="px-6 py-4">
                     <div className="flex space-x-2">
                       <button
-                        onClick={editUser}
-                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+                        onClick={()=>editUser(user.id,user)}
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded cursor-pointer"
                         >
                         Edit
                       </button>
                       <button
                         onClick={()=>deletedata(user.id,user)}
-                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded cursor-pointer"
                         >
                         Delete
                       </button>
