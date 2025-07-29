@@ -19,6 +19,10 @@ const Home = () => {
 
   const editUser = () => {};
 
+  const deletedata = (id,user) =>{
+    deleteUser(id,user);
+  }
+
   return (
     <>
       <div className="grid m-10 gap-5 justify-center items-center">
@@ -77,7 +81,7 @@ const Home = () => {
                         Edit
                       </button>
                       <button
-                        onClick={deleteUser}
+                        onClick={()=>deletedata(user.id,user)}
                         className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
                       >
                         Delete
