@@ -1,10 +1,8 @@
 # Stage 1: Build
 FROM maven:3.9.4-eclipse-temurin-17 AS build
 
-WORKDIR /app
-
 # Copy Backend folder source code to /app
-COPY Backend /app
+COPY . .
 
 # Build the project (adjust if your pom.xml is in Backend root)
 RUN mvn clean package -DskipTests
@@ -12,10 +10,9 @@ RUN mvn clean package -DskipTests
 # Stage 2: Run
 FROM eclipse-temurin:17-jre-alpine
 
-WORKDIR /app
 
 # Copy the built jar from build stage
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /target/*.jar app.jar
 
 # Expose the port your Spring Boot app runs on (default 8080)
 EXPOSE 8080
