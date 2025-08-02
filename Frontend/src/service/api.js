@@ -1,30 +1,35 @@
 const BACKENDURL = import.meta.env.VITE_BACKEND_URL;
 
-export const getUsers = async () => {
-    return fetch(`${BACKENDURL}/api/users`).then(res=>res.json());
+export const getEmployees = async () => {
+    return fetch(`${BACKENDURL}/api/employees`).then(res=>res.json());
 }
 
-export const createUser = async (user) => {
-    return fetch(`${BACKENDURL}/api/users`, {
+export const getEmployeeById = async (id) => {
+  const response = await fetch(`${BACKENDURL}/api/employees/${id}`);
+  return await response.json();
+};
+
+export const createEmployee = async (employee) => {
+    return fetch(`${BACKENDURL}/api/employees`, {
         method:"POST",
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(user),
+        body:JSON.stringify(employee),
     });
 }
 
-export const updateUser = async(id,user) => {
-    return fetch(`${BACKENDURL}/api/users/${id}`, {
+export const updateEmployee = async(id,employee) => {
+    return fetch(`${BACKENDURL}/api/employees/${id}`, {
         method:'PATCH',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(user),
+        body:JSON.stringify(employee),
     });
 }
 
-export const deleteUser = async(id,user) => {
-    return fetch(`${BACKENDURL}/api/users/${id}`, {
+export const deleteEmployee = async(id,employee) => {
+    return fetch(`${BACKENDURL}/api/employees/${id}`, {
         method:'DELETE',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(user),
+        body:JSON.stringify(employee),
     });
 }
 
