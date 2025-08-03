@@ -7,36 +7,30 @@ const EditEmployee = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [employee, setEmployee] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    department: "",
-    role: "",
-    salary: "",
-    joiningDate: "",
-  });
+  const [employee, setEmployee] = useState(null);
 
   useEffect(() => {
-    const fetchEmployee = async () => {
-      try {
-        const data = await getEmployeeById(id);
-        setEmployee(data);
-      } catch (error) {
-        console.error("Fetch error:", error);
-      }
-    };
-    fetchEmployee();
-  }, [id]);
-
-  const handleChange = (e) => {
-    setEmployee({ ...employee, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const fetchEmployee = async () => {
     try {
-      await updateEmployee(id, employee);
+      const data = await getEmployeeById(id);
+      setEmployee(prev => {
+        if (JSON.stringify(prev) !== JSON.stringify(data)) {
+          return data;
+        }
+        return prev;
+      });
+
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  };
+  fetchEmployee();
+}, [id]);
+
+
+  const handleUpdate = async (data) => {
+    try {
+      await updateEmployee(id, data);
       alert("Employee updated successfully!");
       navigate("/employees");
     } catch (error) {
@@ -44,13 +38,15 @@ const EditEmployee = () => {
     }
   };
 
-  return (
+  return employee ? (
     <EmployeeForm
       employee={employee}
-      onChange={handleChange}
-      onSubmit={handleSubmit}
+      onSubmit={handleUpdate}
       isEditing={true}
+      showId={true}
     />
+  ) : (
+    <p className="text-center mt-10 text-gray-600">Loading employee data . . .</p>
   );
 };
 

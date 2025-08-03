@@ -5,22 +5,8 @@ import EmployeeForm from "../components/EmployeeForm";
 
 const AddEmployee = () => {
     const navigate = useNavigate();
-  const [employee, setEmployee] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    department: "",
-    role: "",
-    salary: "",
-    joiningDate: "",
-  });
 
-  const handleChange = (e) => {
-    setEmployee({ ...employee, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleAddEmployee = async(employee) => {
     try {
       await createEmployee(employee);
       alert("Employee added successfully!");
@@ -32,10 +18,10 @@ const AddEmployee = () => {
 
   return (
     <EmployeeForm
-    employee={employee}
-    onChange={handleChange}
-    onSubmit={handleSubmit}
+    
+    onSubmit={handleAddEmployee}
     isEditing={false}
+    showId={false}
     />
   )
 }

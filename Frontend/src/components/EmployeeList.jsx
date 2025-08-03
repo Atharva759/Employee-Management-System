@@ -6,6 +6,9 @@ import { getEmployees, deleteEmployee } from "../service/api";
 const EmployeeList = () => {
 
   const [employees, setEmployees] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedDepartment,setSelectedDepartment] = useState("");
+  const departmentOptions = [...new Set(employees.map(emp=>emp.department))];
 
   const showdata = () =>{
     getEmployees().then(employees => {
@@ -24,6 +27,17 @@ const EmployeeList = () => {
       .catch((err)=> console.error(err));
   };
 
+  const filterEmployees = employees.filter((emp)=> {
+    const matcheSearch = 
+    emp.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    emp.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    emp.department.toLowerCase().includes(searchQuery.toLowerCase());
+
+    const matchesDepartment = selectedDepartment === "" || emp.department === selectedDepartment;
+    return matcheSearch && matchesDepartment;
+  }
+);
+
 
   return (
     <>
@@ -31,12 +45,31 @@ const EmployeeList = () => {
         <h1 className="font-medium text-center text-xl ">
           Employees List
         </h1>
+
+        <div>
+          <input type="text" 
+          placeholder="Search by name, email or department"
+          value={searchQuery}
+          onChange={(e)=>setSearchQuery(e.target.value)}
+          className="mb-4 p-2 border border-gray-300 rounded w-full max-w-md"
+          />
+          <select
+          value={selectedDepartment}
+          onChange={(e)=>setSelectedDepartment(e.target.value)}
+          className="mb-4 p-2 border border-gray-300 rounded w-full max-w-xs"
+          >
+            <option value="">All Departments</option>
+            {departmentOptions.map((dept)=>(
+              <option key={dept} value={dept}>{dept}</option>
+            ))}
+          </select>
+        </div>
         
         <div className="flex justify-center items-center min-h-screen ">
           <table className="table-auto border-collapse bg-white shadow-md rounded-lg overflow-hidden">
             <thead className="bg-gray-700 text-white">
               <tr>
-                <th className="px-6 py-3 text-left">Sr No</th>
+                <th className="px-6 py-3 text-left">EMP ID</th>
                 <th className="px-6 py-3 text-left">Name</th>
                 <th className="px-6 py-3 text-left">Email</th>
                 <th className="px-6 py-3 text-left">Department</th>
@@ -49,9 +82,9 @@ const EmployeeList = () => {
             </thead>
             <tbody>
             
-              {  employees.length===0 ? (<tr><td colSpan="9" className="text-center">Loading...</td></tr>) :  (
+              {  filterEmployees.length===0 ? (<tr><td colSpan="9" className="text-center">Loading...</td></tr>) :  (
 
-                employees.map((employee) => (
+                filterEmployees.map((employee) => (
                   <tr key={employee.id} className="hover:bg-gray-100 border-t">
                   <td className="px-6 py-4">{employee.id}</td>
                   <td className="px-6 py-4">{employee.name}</td>
