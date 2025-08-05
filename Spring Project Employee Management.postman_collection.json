@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "1b2ba9f8-36b5-44e0-88d5-0b87de35c2fa",
+		"name": "Spring Project Employee Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33050402"
+	},
+	"item": [
+		{
+			"name": "getEmployees",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/employees",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createEmployee",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Test12\",\r\n    \"email\":\"test12@mail.com\",\r\n    \"company\":\"Texas\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/employees",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"employees"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateEmployee",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Alice Wonder\",\r\n    \"email\":\"alice@example.com\",\r\n    \"company\":\"Corp\"\r\n}"
+				},
+				"url": {
+					"raw": "{{baseURL}}/api/employees/1",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"employees",
+						"1"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "21",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteEmployee",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/employees/21",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"employees",
+						"21"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getEmployeeById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/api/employees/30",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"api",
+						"employees",
+						"30"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "localhost:8080",
+			"type": "default"
+		}
+	]
+}

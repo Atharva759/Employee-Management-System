@@ -7,8 +7,11 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 
+
 function App() {
   return (
+    <>
+    
     <Router>
       <Navbar/>
       <Routes>
@@ -20,6 +23,7 @@ function App() {
         <Route path="*" element={<div className="text-center mt-10 text-red-500">Page Not Found</div>} />
       </Routes>
     </Router>
+    </>
   );
 }
 

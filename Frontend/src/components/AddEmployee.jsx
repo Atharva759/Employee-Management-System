@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { createEmployee } from "../service/api";
 import EmployeeForm from "../components/EmployeeForm";
 
+
 const AddEmployee = () => {
     const navigate = useNavigate();
+    
 
   const handleAddEmployee = async(employee) => {
     try {
       await createEmployee(employee);
-      alert("Employee added successfully!");
+      
       navigate("/employees");
     } catch (error) {
       console.error("Add failed:", error);
@@ -17,12 +19,14 @@ const AddEmployee = () => {
   };
 
   return (
-    <EmployeeForm
+    <>
     
+    <EmployeeForm
     onSubmit={handleAddEmployee}
     isEditing={false}
     showId={false}
     />
+    </>
   )
 }
 
