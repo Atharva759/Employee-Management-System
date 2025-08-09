@@ -1,8 +1,8 @@
-package com.atharva.proj1.controller;
+package com.atharva.proj1.ems.controller;
 
 
-import com.atharva.proj1.entity.Employee;
-import com.atharva.proj1.repository.EmployeeRepository;
+import com.atharva.proj1.ems.entity.Employee;
+import com.atharva.proj1.ems.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

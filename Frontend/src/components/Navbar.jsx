@@ -10,16 +10,13 @@ const Navbar = () => {
           Employee Management System
         </Link>
 
-        
+         
         <div className="hidden md:flex gap-8 items-center text-white text-sm font-medium">
-          <Link to="/employees" className="hover:text-blue-300 transition">
-            Employees
+          <Link to="/adminportal" className=" transition bg-blue-700 p-2 rounded-md">
+            Admin Portal
           </Link>
-          <Link to="/add" className="hover:text-blue-300 transition">
-            Add Employee
-          </Link>
-          <Link to="/dashboard" className="hover:text-blue-300 transition">
-            Dashboard
+          <Link to="/empportal" className=" transition bg-blue-700 p-2 rounded-md">
+            Employee Portal
           </Link>
         </div>
 

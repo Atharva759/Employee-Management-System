@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { createEmployee } from "../service/api";
+import { createEmployee } from "../service/employeeapi";
 import EmployeeForm from "../components/EmployeeForm";
 
 

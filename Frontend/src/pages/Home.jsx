@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+
 import bg from "../assets/bg.jpg";
 
 const Home = () => {
@@ -15,8 +15,6 @@ const Home = () => {
             Manage your employees with ease. Track records, analyze insights, and streamline operations — all in one place.
           </p>
         </div>
-
-        {/* Right Image Section */}
         <div className="md:w-1/2 flex justify-center">
           <img
             src={bg}
@@ -24,7 +22,6 @@ const Home = () => {
             className="w-[320px] md:w-[450px] rounded-md shadow-2xl object-cover"
           />
         </div>
-
       </section>
     </div>
   );
