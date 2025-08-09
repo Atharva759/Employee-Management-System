@@ -1,4 +1,4 @@
-package com.atharva.proj1.entity;
+package com.atharva.proj1.ems.entity;
 
 
 import jakarta.persistence.*;
@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 
 @Entity
-@Table(name="crud_db")
+@Table(name="employee_info")
 public class Employee {
 
     @Id
@@ -17,6 +17,7 @@ public class Employee {
     private String name;
 
     private String phone;
+    private String email;
     private String department;
     private String role;
 
@@ -86,10 +87,5 @@ public class Employee {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    private String email;
-
-
-
 
 }
