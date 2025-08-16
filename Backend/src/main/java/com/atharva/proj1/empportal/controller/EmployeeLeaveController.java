@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/leave")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin
 public class EmployeeLeaveController {
     private LeaveRequestService leaveRequestService;
 
