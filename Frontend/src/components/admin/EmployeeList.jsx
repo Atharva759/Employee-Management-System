@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { getEmployees, deleteEmployee } from "../service/employeeapi";
+import { getEmployees, deleteEmployee } from "../../service/employeeapi";
 
 const EmployeeList = () => {
 

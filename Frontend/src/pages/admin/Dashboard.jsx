@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { getEmployees } from '../service/employeeapi';
+import { useEffect, useState } from 'react';
+import { getEmployees } from '../../service/employeeapi';
 import {
   PieChart, Pie, Cell, Tooltip, Legend,
   LineChart, Line, XAxis, YAxis, CartesianGrid,

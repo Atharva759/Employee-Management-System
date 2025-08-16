@@ -1,11 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import AuthPage from './AuthPage'
+
+import AuthPage from '../auth/AuthPage'
 
 const EmployeePortal = () => {
   return (
     <>
-    
     <AuthPage/>
     </>
   )

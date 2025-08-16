@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { registerEmployee, loginEmployee } from "../service/authapi";
+import { registerEmployee, loginEmployee } from "../../service/authapi";
 import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
@@ -11,9 +11,9 @@ const AuthPage = () => {
   const onSubmit = async (data) => {
     try {
       if (isLogin) {
-        const res = await loginEmployee(data); // API call
-        const userEmail = res.email || data.email; // prefer API response
-        localStorage.setItem("userEmail", userEmail);
+        const res = await loginEmployee(data); 
+        const userEmail = res.email || data.email; 
+        sessionStorage.setItem("userEmail", userEmail);
         alert("Login successful!");
         navigate(`/employeeprofile/${encodeURIComponent(userEmail)}`);
       } else {

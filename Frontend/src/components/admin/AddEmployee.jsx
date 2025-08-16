@@ -1,7 +1,6 @@
-import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { createEmployee } from "../service/employeeapi";
-import EmployeeForm from "../components/EmployeeForm";
+import { createEmployee } from "../../service/employeeapi";
+import EmployeeForm from "./EmployeeForm";
 
 
 const AddEmployee = () => {

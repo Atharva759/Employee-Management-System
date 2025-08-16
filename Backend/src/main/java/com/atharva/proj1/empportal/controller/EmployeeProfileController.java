@@ -17,5 +17,4 @@ public class EmployeeProfileController {
     public EmployeeProfile getProfile(@PathVariable String email){
         return profileService.getProfileByEmail(email);
     }
-
 }

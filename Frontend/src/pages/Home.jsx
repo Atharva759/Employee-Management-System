@@ -3,7 +3,7 @@ import bg from "../assets/bg.jpg";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-[#0f172a] text-white flex items-center">
+    <div className="min-h-screen bg-[#0f172a] text-white flex items-center ">
       <section className="flex flex-col-reverse md:flex-row items-center justify-between max-w-7xl mx-auto px-6 py-10 gap-12 w-full">
         
         {/* Left Text Section */}
