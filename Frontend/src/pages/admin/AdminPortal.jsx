@@ -6,7 +6,7 @@ const AdminPortal = () => {
     { title: "View Employees", link: "/employees", color: "bg-blue-500" },
     { title: "Add Employee", link: "/add", color: "bg-green-500" },
     { title: "Dashboard", link: "/dashboard", color: "bg-purple-500" },
-    { title: "Coming Soon", link: "/", color: "bg-yellow-500" },
+    { title: "Leave Requests", link: "/leaverequests", color: "bg-yellow-500" },
   ];
   return (
     <div className="min-h-screen bg-gray-50 p-6">

@@ -20,16 +20,14 @@ public class EmployeeLeaveController {
     public EmployeeLeaveRequest applyLeave(@RequestBody EmployeeLeaveRequest employeeLeaveRequest){
         return leaveRequestService.applyLeave(employeeLeaveRequest);
     }
+
     @GetMapping("/employee/{email}")
     public List<EmployeeLeaveRequest> getLeavesByEmployee(@PathVariable String email){
         return leaveRequestService.getLeavesByEmployee(email);
     }
 
     // Admin side
-    @GetMapping("/all")
-    public List<EmployeeLeaveRequest> getAllLeaves(){
-        return leaveRequestService.getAllLeaves();
-    }
+
     @PutMapping("{id}/status")
     public EmployeeLeaveRequest updateLeaveStatus(@PathVariable Long id, @RequestParam EmployeeLeaveRequest.LeaveStatus status){
         return leaveRequestService.updateLeaveStatus(id,status);

@@ -29,7 +29,7 @@ public class LeaveController {
     }
 
     // Admin: Get all leaves
-    @GetMapping
+    @GetMapping("/all")
     public List<LeaveRequest> getAllLeaves() {
         return leaveService.getAllLeaves();
     }

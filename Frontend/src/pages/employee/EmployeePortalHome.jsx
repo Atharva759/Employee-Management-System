@@ -27,6 +27,11 @@ const EmployeePortalHome = () => {
           >
             Apply Leave
           </Link>
+
+          <Link to={`/employeeleaves/${email || sessionStorage.getItem("userEmail")?.replace(/"/g, "")}`}
+          className="w-full px-4 py-3 bg-yellow-600 text-white font-medium rounded-lg shadow hover:bg-yellow-700 transition">
+        My Leaves
+      </Link>
         </div>
       </div>
     </div>
