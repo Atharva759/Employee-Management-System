@@ -14,11 +14,12 @@ import Home from "./pages/Home";
 import ApplyLeave from "./components/employee/ApplyLeave";
 import LeaveRequests from "./components/admin/LeaveRequests";
 import EmployeeLeavesList from "./components/employee/EmployeeLeavesList";
-
+import {Toaster} from "react-hot-toast";
 
 function App() {
   return (
     <>
+    <Toaster/>
     <Router>
       <Navbar/>
       <Routes>

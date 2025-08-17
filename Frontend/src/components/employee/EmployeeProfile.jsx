@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { getEmployeeProfile } from "../../service/employeeprofileapi";
+import toast from "react-hot-toast";
 
 const EmployeeProfile = () => {
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
   const { email } = useParams();
+
+  const handleLogout = ()=>{
+    sessionStorage.clear();
+    toast.success("Logged Out!",{
+      duration:3000,
+      position:"top-right",
+    });
+  }
 
   useEffect(() => {
     const userEmail = email || sessionStorage.getItem("userEmail")?.replace(/"/g, "");
@@ -67,7 +76,7 @@ const EmployeeProfile = () => {
           >
             Home
           </Link>
-          <Link onClick={()=> sessionStorage.clear()} to="/" className="px-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-300 transition">Logout</Link>
+          <Link onClick={handleLogout} to="/" className="px-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-300 transition">Logout</Link>
         </div>
       </div>
     </div>

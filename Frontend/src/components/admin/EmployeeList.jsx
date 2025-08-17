@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import toast, { Toaster } from 'react-hot-toast';
 import { getEmployees, deleteEmployee } from "../../service/employeeapi";
 
 const EmployeeList = () => {
@@ -25,6 +25,11 @@ const EmployeeList = () => {
     deleteEmployee(id,employee)
       .then(()=>showdata())
       .catch((err)=> console.error(err));
+    toast("Employee Deleted!",{
+      duration:3000,
+      position:"top-right",
+      icon:'⛔',
+    });  
   };
 
   const filterEmployees = employees.filter((emp)=> {
@@ -41,6 +46,7 @@ const EmployeeList = () => {
 
   return (
     <>
+    <Toaster/>
       <div className="grid m-10 gap-5 justify-center items-center">
         <h1 className="font-medium text-center text-xl ">
           Employees List

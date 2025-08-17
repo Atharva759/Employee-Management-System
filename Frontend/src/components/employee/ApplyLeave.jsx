@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { applyLeave } from "../../service/leaveapi";
+import toast from "react-hot-toast";
 
 const ApplyLeave = () => {
   const { email } = useParams();
@@ -21,12 +22,16 @@ const ApplyLeave = () => {
     const leaveData = { ...form, employeeEmail: email };
     try {
       const res = await applyLeave(leaveData);
-      console.log(leaveData);
-      alert(res.message || "Leave applied successfully");
+      toast.success("Leave Applied Successfully!",{
+        duration:3000,
+        position:"top-right",
+      });
       navigate(`/employeeportalhome`);
     } catch (err) {
-      console.error(err);
-      alert("Error applying leave");
+      toast.error("Something went wrong!",{
+        duration:3000,
+        position:"top-right",
+      });
     }
   };
 
@@ -40,7 +45,6 @@ const ApplyLeave = () => {
           Apply for Leave
         </h2>
 
-        {/* Start Date */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">
             Start Date
@@ -55,7 +59,6 @@ const ApplyLeave = () => {
           />
         </div>
 
-        {/* End Date */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">
             End Date
@@ -70,7 +73,6 @@ const ApplyLeave = () => {
           />
         </div>
 
-        {/* Reason */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">Reason</label>
           <textarea
@@ -83,7 +85,6 @@ const ApplyLeave = () => {
           ></textarea>
         </div>
 
-        {/* Leave Type */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">
             Leave Type
@@ -101,7 +102,7 @@ const ApplyLeave = () => {
           </select>
         </div>
 
-        {/* Submit Button */}
+        
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition cursor-pointer"

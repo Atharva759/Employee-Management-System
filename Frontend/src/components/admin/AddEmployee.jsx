@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { createEmployee } from "../../service/employeeapi";
 import EmployeeForm from "./EmployeeForm";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 
 const AddEmployee = () => {
@@ -10,16 +12,18 @@ const AddEmployee = () => {
   const handleAddEmployee = async(employee) => {
     try {
       await createEmployee(employee);
-      
+      toast.success("Employee Added Successfully!",{
+        duration:3000,
+        position:"top-right",
+      });
       navigate("/employees");
     } catch (error) {
-      console.error("Add failed:", error);
+      toast.error("Failed to Add Employee")
     }
   };
 
   return (
     <>
-    
     <EmployeeForm
     onSubmit={handleAddEmployee}
     isEditing={false}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { registerEmployee, loginEmployee } from "../../service/authapi";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -14,17 +15,27 @@ const AuthPage = () => {
         const res = await loginEmployee(data); 
         const userEmail = res.email || data.email; 
         sessionStorage.setItem("userEmail", userEmail);
-        alert("Login successful!");
+        toast.success("Logged In !",{
+          duration:3000,
+          position:"top-right",
+        })
         navigate(`/employeeprofile/${encodeURIComponent(userEmail)}`);
       } else {
         await registerEmployee(data);
-        alert("Registration successful!");
+        toast.success("Employee Registered!",{
+          duration:3000,
+          position:"top-right"
+        });
       }
       reset();
     } catch (err) {
-      alert("Error: " + err.message);
+      toast.error("Something went wrong!",{
+        duration:3000,
+        position:"top-right",
+      });
     }
   };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">

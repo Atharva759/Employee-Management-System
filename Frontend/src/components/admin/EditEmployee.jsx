@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getEmployeeById, updateEmployee } from "../../service/employeeapi";
 import EmployeeForm from "./EmployeeForm";
+import toast from "react-hot-toast";
 
 const EditEmployee = () => {
   const { id } = useParams();
@@ -31,10 +32,17 @@ const EditEmployee = () => {
   const handleUpdate = async (data) => {
     try {
       await updateEmployee(id, data);
-      alert("Employee updated successfully!");
+      toast("Employee Edited!",{
+        position:"top-right",
+        duration:3000,
+        icon:'ℹ️',
+      })
       navigate("/employees");
     } catch (error) {
-      console.error("Update failed:", error);
+      toast.error("Something went wrong!",{
+        duration:3000,
+        position:"top-right",
+      });
     }
   };
 

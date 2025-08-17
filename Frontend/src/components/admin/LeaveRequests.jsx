@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllEmployeeLeaves ,updateLeaveStatus} from "../../service/leaveapi";
+import toast from "react-hot-toast";
 
 const LeaveRequests = () => {
   const [leaverequests, setLeaveRequests] = useState([]);
@@ -11,9 +12,22 @@ const LeaveRequests = () => {
 
   const handleStatusChange = async(id,status)=>{
     await updateLeaveStatus(id,status);
+    
      setLeaveRequests(prev =>
        prev.map(req => req.id === id ? { ...req, status } : req)
     );
+
+    if(status==="APPROVED"){
+      toast("Leave Approved ✅",{
+        duration:3000,
+        position:"top-right",
+      });
+    }else if(status==="REJECTED"){
+      toast("Leave Rejected ❌",{
+        duration:3000,
+        position:"top-right",
+      });
+    }
   }
 
   useEffect(() => {
