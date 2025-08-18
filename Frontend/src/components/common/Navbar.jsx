@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ServerStatus from "./ServerStatus";
 
 const Navbar = () => {
   return (
@@ -9,6 +10,7 @@ const Navbar = () => {
         <img className="w-15 h-15" src="/logo.svg" />
           Employee Management System
         </Link>
+
         <div className="hidden md:flex gap-8 items-center text-white text-sm font-medium">
           <Link to="/adminportal" className=" transition bg-blue-700 p-2 rounded-md">
             Admin Portal
@@ -16,6 +18,7 @@ const Navbar = () => {
           <Link to="/empportal" className=" transition bg-blue-700 p-2 rounded-md">
             Employee Portal
           </Link>
+          <ServerStatus/>
         </div>
 
       </div>
