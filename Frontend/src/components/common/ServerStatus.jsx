@@ -15,7 +15,7 @@ const ServerStatus = () => {
             }
         };
         checkserver();
-        const serverchecktime = 30000;
+        const serverchecktime = 3000;
         const interval = setInterval(checkserver,serverchecktime);
         return () => clearInterval(interval);
     },[])
@@ -24,11 +24,19 @@ const ServerStatus = () => {
     <div className="flex items-center gap-2">
       <span
         className={`h-3 w-3 rounded-full ${
-          status === "online" ? "bg-green-500" : "bg-red-500"
+          status === "online"
+            ? "bg-green-500 animate-pulse" // green pulse when online
+            : status === "checking"
+            ? "bg-yellow-400 animate-ping" // yellow ping while checking
+            : "bg-red-500 animate-pulse" // red pulse when offline
         }`}
       ></span>
       <p className="text-sm font-medium">
-        {status === "checking" ? "Checking..." : status === "online" ? "Server Live" : "Server Down"}
+        {status === "checking"
+          ? "Checking..."
+          : status === "online"
+          ? " Server Live"
+          : " Server Down"}
       </p>
     </div>
   )
