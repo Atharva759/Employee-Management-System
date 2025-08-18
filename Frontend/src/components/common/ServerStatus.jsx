@@ -3,6 +3,7 @@ import { BACKEND_URL } from "../../service/leaveapi";
 
 const ServerStatus = () => {
     const [status,setStatus] = useState("Checking");
+    const serverchecktime = import.meta.env.VITE_SERVER_CHECK_TIME_HRS;
 
     useEffect(()=>{
         const checkserver = async()=>{
@@ -15,8 +16,7 @@ const ServerStatus = () => {
             }
         };
         checkserver();
-        const serverchecktime = 3000;
-        const interval = setInterval(checkserver,serverchecktime);
+        const interval = setInterval(checkserver,serverchecktime*60*60*1000);
         return () => clearInterval(interval);
     },[])
 
