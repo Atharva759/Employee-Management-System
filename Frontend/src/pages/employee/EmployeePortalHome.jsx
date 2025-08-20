@@ -74,7 +74,7 @@ const EmployeePortalHome = () => {
           {/* Logout */}
           <button
             onClick={handleLogout}
-            className="w-full px-4 py-3 bg-red-500 text-white font-medium rounded-lg shadow hover:bg-red-600 transition"
+            className="w-full px-4 py-3 bg-red-500 text-white font-medium rounded-lg shadow hover:bg-red-600 transition cursor-pointer"
           >
             Logout
           </button>

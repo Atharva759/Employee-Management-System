@@ -6,7 +6,6 @@ const ServerStatus = () => {
     const [status,setStatus] = useState("Checking");
     const serverchecktime = import.meta.env.VITE_SERVER_CHECK_TIME_HRS;
 
-    
         const checkserver = async()=>{
             try {
                 const res = await fetch(`${BACKEND_URL}/actuator/health`);
@@ -16,6 +15,7 @@ const ServerStatus = () => {
                 setStatus("offline");
             }
         };
+
   return (
     <div className="flex items-center gap-2">
       <span
