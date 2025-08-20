@@ -3,8 +3,10 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { getEmailFromToken } from "../../util/jwtEmail";
 
-
 const EmployeePortalHome = () => {
+  const [email, setEmail] = useState(null);
+  const [name, setName] = useState("");
+  const navigate = useNavigate();
 
   const formatName = (email) => {
     if (!email) return "";
@@ -12,22 +14,22 @@ const EmployeePortalHome = () => {
       .split("@")[0]
       .split(".")
       .join(" ")
-      .replace(/\b\w/g, char => char.toUpperCase());
+      .replace(/\b\w/g, (char) => char.toUpperCase());
   };
 
-  const navigate = useNavigate();
-  const [email, setEmail] = useState(null);
-  const [name, setName] = useState("");
-
   useEffect(() => {
-    const userEmail = getEmailFromToken();
+    const userEmail = getEmailFromToken(); 
+    if (!userEmail) {
+      navigate("/register"); 
+      return;
+    }
     setEmail(userEmail);
     setName(formatName(userEmail));
-  }, [name,navigate]);
+  }, [navigate]);
 
   const handleLogout = () => {
     Cookies.remove("token");
-    navigate("/");
+    navigate("/register");
   };
 
   if (!email) {
@@ -47,7 +49,6 @@ const EmployeePortalHome = () => {
         <p className="text-gray-500 mb-8">Your employee portal dashboard</p>
 
         <div className="flex flex-col gap-4">
-          {/* Profile */}
           <Link
             to={`/employeeprofile`}
             className="w-full px-4 py-3 bg-blue-600 text-white font-medium rounded-lg shadow hover:bg-blue-700 transition"
@@ -55,23 +56,20 @@ const EmployeePortalHome = () => {
             Profile
           </Link>
 
-          {/* Apply Leave */}
           <Link
-            to={`/empportal/${email}/leaves/apply`}
+            to={`/leave/apply`}
             className="w-full px-4 py-3 bg-green-600 text-white font-medium rounded-lg shadow hover:bg-green-700 transition"
           >
             Apply Leave
           </Link>
 
-          {/* My Leaves */}
           <Link
-            to={`/my`}
+            to={`/myleaves`}
             className="w-full px-4 py-3 bg-yellow-600 text-white font-medium rounded-lg shadow hover:bg-yellow-700 transition"
           >
             My Leaves
           </Link>
 
-          {/* Logout */}
           <button
             onClick={handleLogout}
             className="w-full px-4 py-3 bg-red-500 text-white font-medium rounded-lg shadow hover:bg-red-600 transition cursor-pointer"

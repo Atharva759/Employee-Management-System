@@ -9,11 +9,8 @@ export const getEmailFromToken = () => {
 
 
     if (!token) return null;
-
     try {
         const decoded = jwtDecode(token);
-        
-
         return decoded.email || decoded.sub || null;
     } catch (error) {
     
