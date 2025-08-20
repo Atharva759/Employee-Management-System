@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/employee/auth")
-@CrossOrigin( allowCredentials = "true")
+@CrossOrigin(originPatterns = {"http://localhost:5173","https://employee-management-sys-afk.vercel.app"}, allowCredentials = "true")
 public class EmployeeAuthController {
 
 
