@@ -17,6 +17,7 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class EmployeeAuthController {
 
+
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -39,7 +40,7 @@ public class EmployeeAuthController {
                     // Create secure HttpOnly cookie
                     ResponseCookie cookie = ResponseCookie.from("jwt", token)
                             .httpOnly(false) // prod = true , local = false
-                            .secure(true) // prod = true , local = false
+                            .secure(false) // prod = true , local = false
                             .path("/")
                             .maxAge(24 * 60 * 60) // 1 day expiry
                             .sameSite("Lax") // better for frontend navigation
