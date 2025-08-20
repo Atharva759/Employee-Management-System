@@ -1,6 +1,6 @@
 package com.atharva.proj1.dto;
 
-public class LoginRequest
+public class EmployeeLoginRequest
 {
 
     private String email;

@@ -14,17 +14,17 @@ import java.util.Optional;
 public class EmployeeProfileService {
 
     @Autowired
-    private EmployeeAuthRepository authrepo;
+    private EmployeeAuthRepository authRepo;
 
     @Autowired
-    private EmployeeRepository emprepo;
+    private EmployeeRepository empRepo;
 
-    public EmployeeProfile getProfileByEmail(String email) {
-        Optional<EmployeePortal> auth = authrepo.findByEmail(email);
-        Optional<Employee> details = emprepo.findByEmail(email);
+    public Optional<EmployeeProfile> getProfileByEmail(String email) {
+        Optional<EmployeePortal> auth = authRepo.findByEmail(email);
+        Optional<Employee> details = empRepo.findByEmail(email);
 
-        if(auth.isPresent() && details.isPresent()){
-            return new EmployeeProfile(
+        if (auth.isPresent() && details.isPresent()) {
+            EmployeeProfile profile = new EmployeeProfile(
                     auth.get().getName(),
                     auth.get().getEmail(),
                     details.get().getDepartment(),
@@ -32,8 +32,9 @@ public class EmployeeProfileService {
                     details.get().getSalary(),
                     details.get().getJoiningDate()
             );
+            return Optional.of(profile);
         }
-        throw new RuntimeException("Profile not found");
-    }
 
+        return Optional.empty();
+    }
 }

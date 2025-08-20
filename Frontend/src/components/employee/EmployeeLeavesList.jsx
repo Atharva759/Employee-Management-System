@@ -1,20 +1,25 @@
-import { useState,useEffect } from 'react';
-import { getLeavesByEmployee } from '../../service/leaveapi'
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { getLeavesByEmployee } from "../../service/api";
+import { Link } from "react-router-dom";
+import getEmailFromToken from "../../util/jwtEmail";
 
 const EmployeeLeavesList = () => {
-
   const [leaveData, setLeaveData] = useState([]);
-  const email = sessionStorage.getItem("userEmail"); 
+  const email = getEmailFromToken();
+
   const fetchLeaveData = async () => {
-    if (!email) return; 
-    const response = await getLeavesByEmployee(email);
-    setLeaveData(response);
+    if (!email) return;
+    try {
+      const response = await getLeavesByEmployee(email);
+      setLeaveData(response);
+    } catch (err) {
+      console.error("Error fetching leave data:", err);
+    }
   };
 
   useEffect(() => {
-    fetchLeaveData();
-  }, []);
+    if (email) fetchLeaveData();
+  }, [email]);
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4 flex flex-col items-center">
@@ -69,9 +74,15 @@ const EmployeeLeavesList = () => {
           ))}
         </div>
       )}
-      <Link to="/employeeportalhome" className='m-2 p-2 bg-gray-200 rounded transition hover:bg-gray-400'>Back</Link>
-    </div>
-  )
-}
 
-export default EmployeeLeavesList
+      <Link
+        to="/employeeportalhome"
+        className="m-2 p-2 bg-gray-200 rounded transition hover:bg-gray-400"
+      >
+        Back
+      </Link>
+    </div>
+  );
+};
+
+export default EmployeeLeavesList;

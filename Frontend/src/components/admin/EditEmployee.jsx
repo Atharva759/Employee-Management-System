@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getEmployeeById, updateEmployee } from "../../service/employeeapi";
+import { getEmployeeById, updateEmployee } from "../../service/api";
 import EmployeeForm from "./EmployeeForm";
 import toast from "react-hot-toast";
 

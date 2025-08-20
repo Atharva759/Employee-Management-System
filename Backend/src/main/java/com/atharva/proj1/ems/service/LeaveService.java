@@ -15,6 +15,7 @@ public class LeaveService {
     }
 
     public LeaveRequest applyLeave(LeaveRequest leaveRequest) {
+        leaveRequest.setStatus(LeaveRequest.LeaveStatus.PENDING);
         return leaveRepository.save(leaveRequest);
     }
 
@@ -27,7 +28,8 @@ public class LeaveService {
     }
 
     public LeaveRequest updateLeaveStatus(Long id, LeaveRequest.LeaveStatus status) {
-        LeaveRequest leave = leaveRepository.findById(id).orElseThrow();
+        LeaveRequest leave = leaveRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Leave not found"));
         leave.setStatus(status);
         return leaveRepository.save(leave);
     }

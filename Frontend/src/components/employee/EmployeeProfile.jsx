@@ -1,37 +1,45 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import { getEmployeeProfile } from "../../service/employeeprofileapi";
+import { useNavigate, Link } from "react-router-dom";
+import { getEmployeeProfile } from "../../service/api";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+
+// Helper to decode JWT from cookies
+const getEmailFromToken = () => {
+  const token = Cookies.get("token");
+  if (!token) return null;
+
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.sub || payload.email || null;
+  } catch (err) {
+    console.error("Error decoding token", err);
+    return null;
+  }
+};
 
 const EmployeeProfile = () => {
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
-  const { email } = useParams();
 
-  const handleLogout = ()=>{
-    sessionStorage.clear();
-    toast.success("Logged Out!",{
-      duration:3000,
-      position:"top-right",
+  const handleLogout = () => {
+    Cookies.remove("token");
+    toast.success("Logged Out!", {
+      duration: 3000,
+      position: "top-right",
     });
-  }
+    navigate("/");
+  };
 
   useEffect(() => {
-    const userEmail = email || sessionStorage.getItem("userEmail")?.replace(/"/g, "");
+    const email = getEmailFromToken();
 
-    if (!userEmail) {
-      navigate("/login");
-      return;
-    }
+    
 
-    getEmployeeProfile(userEmail)
-      .then((data) => {
-        setProfile(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [email, navigate]);
+    getEmployeeProfile(email)
+      .then((data) => setProfile(data))
+      .catch((err) => console.error("Error fetching profile:", err));
+  }, [navigate]);
 
   if (!profile) {
     return <p className="text-center text-gray-500 mt-10">Loading profile...</p>;
@@ -40,35 +48,19 @@ const EmployeeProfile = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 p-6">
       <div className="bg-white shadow-xl rounded-2xl p-10 w-full max-w-lg">
-        {/* Title */}
         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
           Employee Profile
         </h2>
 
-        {/* Profile Info */}
         <div className="space-y-4 text-gray-700">
-          <p>
-            <span className="font-semibold">Name:</span> {profile.name}
-          </p>
-          <p>
-            <span className="font-semibold">Email:</span> {profile.email}
-          </p>
-          <p>
-            <span className="font-semibold">Department:</span> {profile.department}
-          </p>
-          <p>
-            <span className="font-semibold">Role:</span> {profile.role}
-          </p>
-          <p>
-            <span className="font-semibold">Salary:</span> ₹{profile.salary}
-          </p>
-          <p>
-            <span className="font-semibold">Joining Date:</span>{" "}
-            {profile.joiningDate}
-          </p>
+          <p><span className="font-semibold">Name:</span> {profile.name}</p>
+          <p><span className="font-semibold">Email:</span> {profile.email}</p>
+          <p><span className="font-semibold">Department:</span> {profile.department}</p>
+          <p><span className="font-semibold">Role:</span> {profile.role}</p>
+          <p><span className="font-semibold">Salary:</span> ₹{profile.salary}</p>
+          <p><span className="font-semibold">Joining Date:</span> {profile.joiningDate}</p>
         </div>
 
-        
         <div className="mt-8 flex justify-center gap-4">
           <Link
             to="/employeeportalhome"
@@ -76,7 +68,12 @@ const EmployeeProfile = () => {
           >
             Home
           </Link>
-          <Link onClick={handleLogout} to="/" className="px-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-300 transition">Logout</Link>
+          <button
+            onClick={handleLogout}
+            className="px-5 py-2 bg-red-500 text-white rounded-lg hover:bg-red-300 transition"
+          >
+            Logout
+          </button>
         </div>
       </div>
     </div>

@@ -14,12 +14,12 @@ const AuthPage = () => {
       if (isLogin) {
         const res = await loginEmployee(data); 
         const userEmail = res.email || data.email; 
-        sessionStorage.setItem("userEmail", userEmail);
+        //sessionStorage.setItem("userEmail", userEmail);
         toast.success("Logged In !",{
           duration:3000,
           position:"top-right",
         })
-        navigate(`/employeeprofile/${encodeURIComponent(userEmail)}`);
+        navigate(`/employeeportalhome`);
       } else {
         await registerEmployee(data);
         toast.success("Employee Registered!",{
@@ -29,6 +29,7 @@ const AuthPage = () => {
       }
       reset();
     } catch (err) {
+      console.log(err);
       toast.error("Something went wrong!",{
         duration:3000,
         position:"top-right",

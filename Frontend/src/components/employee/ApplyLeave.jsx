@@ -1,10 +1,24 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { applyLeave } from "../../service/leaveapi";
+import { useNavigate } from "react-router-dom";
+import { applyLeave } from "../../service/api";
 import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+
+// ✅ helper to decode token
+const getEmailFromToken = () => {
+  const token = Cookies.get("jwt");
+  if (!token) return null;
+
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.sub || payload.email || null;
+  } catch (err) {
+    console.error("Error decoding token", err);
+    return null;
+  }
+};
 
 const ApplyLeave = () => {
-  const { email } = useParams();
   const navigate = useNavigate();
   const [form, setForm] = useState({
     startDate: "",
@@ -19,18 +33,27 @@ const ApplyLeave = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const email = getEmailFromToken();
+    if (!email) {
+      toast.error("Not authorized. Please log in again.");
+      navigate("/register");
+      return;
+    }
+
     const leaveData = { ...form, employeeEmail: email };
+
     try {
-      const res = await applyLeave(leaveData);
-      toast.success("Leave Applied Successfully!",{
-        duration:3000,
-        position:"top-right",
+      await applyLeave(leaveData);
+      toast.success("Leave Applied Successfully!", {
+        duration: 3000,
+        position: "top-right",
       });
-      navigate(`/employeeportalhome`);
+      navigate("/employeeportalhome");
     } catch (err) {
-      toast.error("Something went wrong!",{
-        duration:3000,
-        position:"top-right",
+      toast.error("Something went wrong!", {
+        duration: 3000,
+        position: "top-right",
       });
     }
   };
@@ -45,6 +68,7 @@ const ApplyLeave = () => {
           Apply for Leave
         </h2>
 
+        {/* Start Date */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">
             Start Date
@@ -59,6 +83,7 @@ const ApplyLeave = () => {
           />
         </div>
 
+        {/* End Date */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">
             End Date
@@ -73,6 +98,7 @@ const ApplyLeave = () => {
           />
         </div>
 
+        {/* Reason */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">Reason</label>
           <textarea
@@ -85,6 +111,7 @@ const ApplyLeave = () => {
           ></textarea>
         </div>
 
+        {/* Leave Type */}
         <div>
           <label className="block text-gray-700 font-medium mb-2">
             Leave Type
@@ -93,6 +120,7 @@ const ApplyLeave = () => {
             name="leaveType"
             value={form.leaveType}
             onChange={handleChange}
+            required
             className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
           >
             <option value="">Select Type</option>
@@ -102,7 +130,7 @@ const ApplyLeave = () => {
           </select>
         </div>
 
-        
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition cursor-pointer"

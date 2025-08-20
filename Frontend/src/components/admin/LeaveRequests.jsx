@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAllEmployeeLeaves ,updateLeaveStatus} from "../../service/leaveapi";
+import { getAllEmployeeLeaves ,updateLeaveStatus} from "../../service/api";
 import toast from "react-hot-toast";
 
 const LeaveRequests = () => {
@@ -43,9 +43,9 @@ const LeaveRequests = () => {
       
 
       <div className="grid gap-6 w-full max-w-4xl">
-        {leaverequests.map((data, index) => (
+        {leaverequests.map((data) => (
           <div
-            key={index}
+            key={data.id}
             className="bg-white shadow-md rounded-2xl p-6 hover:shadow-lg transition-shadow"
           >
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -59,11 +59,11 @@ const LeaveRequests = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-500">Start Date</p>
-                <p className="font-medium">{data.startDate}</p>
+                <p className="font-medium">{new Date(data.startDate).toLocaleDateString}</p>
               </div>
               <div>
                 <p className="text-sm text-gray-500">End Date</p>
-                <p className="font-medium">{data.endDate}</p>
+                <p className="font-medium">{new Date(data.endDate).toLocaleDateString}</p>
               </div>
               <div>
                 <p className="text-sm text-gray-500">Reason</p>

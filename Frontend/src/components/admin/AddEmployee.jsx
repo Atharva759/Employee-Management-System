@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { createEmployee } from "../../service/employeeapi";
+import { createEmployee } from "../../service/api";
 import EmployeeForm from "./EmployeeForm";
 import toast, { Toaster } from 'react-hot-toast';
 
