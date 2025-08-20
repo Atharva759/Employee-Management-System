@@ -39,7 +39,7 @@ public class EmployeeAuthController {
                 .map(token -> {
                     // Create secure HttpOnly cookie
                     ResponseCookie cookie = ResponseCookie.from("jwt", token)
-                            .httpOnly(true) // prod = true , local = false
+                            .httpOnly(false) // prod = true , local = false
                             .secure(true) // prod = true , local = false
                             .path("/")
                             .maxAge(24 * 60 * 60) // 1 day expiry
