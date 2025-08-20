@@ -23,7 +23,7 @@ const EmployeePortalHome = () => {
     const userEmail = getEmailFromToken();
     setEmail(userEmail);
     setName(formatName(userEmail));
-  }, [navigate]);
+  }, [name,navigate]);
 
   const handleLogout = () => {
     Cookies.remove("token");
