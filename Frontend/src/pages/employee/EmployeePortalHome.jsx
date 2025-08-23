@@ -19,10 +19,17 @@ const EmployeePortalHome = () => {
 
   useEffect(() => {
     const userEmail = getEmailFromToken(); 
-    if (!userEmail) {
-      navigate("/register"); 
-      return;
+
+    try {
+      
+      if (!userEmail) {
+        console.log(done);
+        return;
+      }
+    } catch (error) {
+      console.log(error);
     }
+      
     setEmail(userEmail);
     setName(formatName(userEmail));
   }, [navigate]);

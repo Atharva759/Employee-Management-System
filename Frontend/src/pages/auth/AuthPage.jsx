@@ -13,8 +13,7 @@ const AuthPage = () => {
     try {
       if (isLogin) {
         const res = await loginEmployee(data); 
-        const userEmail = res.email || data.email; 
-        //sessionStorage.setItem("userEmail", userEmail);
+        
         toast.success("Logged In !",{
           duration:3000,
           position:"top-right",

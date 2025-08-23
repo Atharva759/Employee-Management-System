@@ -10,6 +10,7 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Duration;
 import java.util.Map;
 
 @RestController
@@ -39,11 +40,12 @@ public class EmployeeAuthController {
                 .map(token -> {
                     // Create secure HttpOnly cookie
                     ResponseCookie cookie = ResponseCookie.from("jwt", token)
-                            .httpOnly(false) // prod = true , local = false
+                            .httpOnly(true) // prod = true , local = false
                             .secure(true) // prod = true , local = false
+                            .sameSite("None")
                             .path("/")
-                            .maxAge(24 * 60 * 60) // 1 day expiry
-                            .sameSite("Lax") // better for frontend navigation
+                            .maxAge(Duration.ofDays(1)) // 1 day expiry
+                             //.sameSite("Lax")  better for frontend navigation
                             .build();
 
                     response.setHeader("Set-Cookie", cookie.toString());

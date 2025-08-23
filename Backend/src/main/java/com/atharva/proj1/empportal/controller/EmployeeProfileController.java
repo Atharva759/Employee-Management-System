@@ -30,9 +30,9 @@ public class EmployeeProfileController {
             String email = jwtUtil.extractEmail(token);
 
             return profileService.getProfileByEmail(email)
-                    .map(profile -> ResponseEntity.ok().body(profile)) // ✅ explicit
+                    .map(profile -> ResponseEntity.ok().body(profile))
                     .orElseGet(() -> ResponseEntity.status(404)
-                            .<EmployeeProfile>body(null)); // ✅ works fine now
+                            .<EmployeeProfile>body(null));
         }
         catch (io.jsonwebtoken.ExpiredJwtException e) {
             return ResponseEntity.status(401).body(Map.of("error", "Token expired"));
