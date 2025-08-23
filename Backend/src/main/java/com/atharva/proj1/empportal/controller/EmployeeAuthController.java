@@ -6,6 +6,7 @@ import com.atharva.proj1.empportal.entity.EmployeePortal;
 import com.atharva.proj1.util.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +49,7 @@ public class EmployeeAuthController {
                              //.sameSite("Lax")  better for frontend navigation
                             .build();
 
-                    response.setHeader("Set-Cookie", cookie.toString());
+                    response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
                     return ResponseEntity.ok(Map.of(
                             "message", "Login Success",
