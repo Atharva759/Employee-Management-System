@@ -4,7 +4,7 @@ export const getEmailFromToken = () => {
     const cookieString = document.cookie;
     const token = cookieString
         .split("; ")
-        .find((row) => row.startsWith("jwt="))
+        .find((row) => row.startsWith("token="))
         ?.split("=")[1];
 
 
@@ -13,7 +13,6 @@ export const getEmailFromToken = () => {
         const decoded = jwtDecode(token);
         return decoded.email || decoded.sub || null;
     } catch (error) {
-    
         return null;
     }
 };

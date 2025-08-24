@@ -21,7 +21,7 @@ public class EmployeeProfileController {
     private JwtUtil jwtUtil;
 
     @GetMapping
-    public ResponseEntity<?> getProfile(@CookieValue(name = "jwt", required = false) String token) {
+    public ResponseEntity<?> getProfile(@CookieValue(name = "token") String token) {
         if (token == null) {
             return ResponseEntity.status(401).body(Map.of("error", "Unauthorized: No token found"));
         }

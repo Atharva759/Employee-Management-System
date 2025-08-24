@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { getEmailFromToken } from "../../util/jwtEmail";
+import { getEmployeeProfile } from "../../service/api";
 
 const EmployeePortalHome = () => {
   const [email, setEmail] = useState(null);
@@ -17,22 +18,21 @@ const EmployeePortalHome = () => {
       .replace(/\b\w/g, (char) => char.toUpperCase());
   };
 
-  useEffect(() => {
-    const userEmail = getEmailFromToken(); 
-
+useEffect(() => {
+  const fetchProfile = async () => {
     try {
-      
-      if (!userEmail) {
-        console.log(done);
-        return;
-      }
-    } catch (error) {
-      console.log(error);
+      const data = await getEmployeeProfile();  // already JSON
+
+      setEmail(data.email);
+      setName(formatName(data.email));
+    } catch (err) {
+      console.error("Unauthorized or error fetching profile:", err);
+      navigate("/login"); // redirect to login if unauthorized
     }
-      
-    setEmail(userEmail);
-    setName(formatName(userEmail));
-  }, [navigate]);
+  };
+
+  fetchProfile();
+}, [navigate]);
 
   const handleLogout = () => {
     Cookies.remove("token");

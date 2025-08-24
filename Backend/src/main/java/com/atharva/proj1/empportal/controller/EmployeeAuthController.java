@@ -26,27 +26,26 @@ public class EmployeeAuthController {
     @Autowired
     private EmployeeAuthService authService;
 
-    // ✅ Register new employee
+    //  Register new employee
     @PostMapping("/register")
     public ResponseEntity<?> signup(@RequestBody EmployeePortal employeePortal) {
         EmployeePortal saved = authService.register(employeePortal);
         return ResponseEntity.ok(saved);
     }
 
-    // ✅ Login employee and set JWT in HttpOnly cookie
+    //  Login employee and set JWT in HttpOnly cookie
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody EmployeeLoginRequest req, HttpServletResponse response) {
 
         return authService.login(req.getEmail(), req.getPassword())
                 .map(token -> {
                     // Create secure HttpOnly cookie
-                    ResponseCookie cookie = ResponseCookie.from("jwt", token)
+                    ResponseCookie cookie = ResponseCookie.from("token", token)
                             .httpOnly(true) // prod = true , local = false
                             .secure(true) // prod = true , local = false
                             .sameSite("None")
                             .path("/")
                             .maxAge(Duration.ofDays(1)) // 1 day expiry
-                             //.sameSite("Lax")  better for frontend navigation
                             .build();
 
                     response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
@@ -59,10 +58,10 @@ public class EmployeeAuthController {
                 .orElse(ResponseEntity.status(401).body(Map.of("error", "Invalid credentials")));
     }
 
-    // ✅ Logout - clear JWT cookie
+    //  Logout - clear JWT cookie
     @PostMapping("/logout")
     public ResponseEntity<?> logout(HttpServletResponse response) {
-        ResponseCookie cookie = ResponseCookie.from("jwt", "")
+        ResponseCookie cookie = ResponseCookie.from("token", "")
                 .httpOnly(true)
                 .secure(false)
                 .path("/")

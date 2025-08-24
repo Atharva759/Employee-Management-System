@@ -87,6 +87,7 @@ export const updateLeaveStatus = async (id, status) => {
 
 export const getEmployeeProfile = async () => {
   const res = await fetch(`${BACKEND_URL}/api/profile`, {
+    method:"GET",
     credentials: "include",
   });
   if (!res.ok) throw new Error("Failed to fetch profile");
