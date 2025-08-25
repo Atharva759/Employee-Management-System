@@ -1,24 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { applyLeave } from "../../service/api";
 import toast from "react-hot-toast";
-import Cookies from "js-cookie";
-
-// ✅ helper to decode token
-const getEmailFromToken = () => {
-  const token = Cookies.get("jwt");
-  if (!token) return null;
-
-  try {
-    const payload = JSON.parse(atob(token.split(".")[1]));
-    return payload.sub || payload.email || null;
-  } catch (err) {
-    console.error("Error decoding token", err);
-    return null;
-  }
-};
+import getEmailFromToken from "../../util/jwtEmail";
 
 const ApplyLeave = () => {
+  const email = getEmailFromToken();
   const navigate = useNavigate();
   const [form, setForm] = useState({
     startDate: "",
@@ -57,6 +44,10 @@ const ApplyLeave = () => {
       });
     }
   };
+
+  useEffect(()=>{
+
+  },[email])
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">

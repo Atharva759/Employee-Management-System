@@ -1,4 +1,4 @@
-package com.atharva.proj1.empportal.controller;
+package com.atharva.proj1.ems.controller;
 
 import com.atharva.proj1.empportal.entity.EmployeeLeaveRequest;
 import com.atharva.proj1.empportal.service.LeaveRequestService;

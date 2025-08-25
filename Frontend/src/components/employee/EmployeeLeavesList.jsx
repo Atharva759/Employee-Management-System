@@ -9,8 +9,9 @@ const EmployeeLeavesList = () => {
 
   const fetchLeaveData = async () => {
     if (!email) return;
+    
     try {
-      const response = await getLeavesByEmployee(email);
+      const response = await getLeavesByEmployee();
       setLeaveData(response);
     } catch (err) {
       console.error("Error fetching leave data:", err);

@@ -42,7 +42,7 @@ public class EmployeeAuthController {
                     // Create secure HttpOnly cookie
                     ResponseCookie cookie = ResponseCookie.from("token", token)
                             .httpOnly(true) // prod = true , local = false
-                            .secure(true) // prod = true , local = false
+                            .secure(true) 
                             .sameSite("None")
                             .path("/")
                             .maxAge(Duration.ofDays(1)) // 1 day expiry

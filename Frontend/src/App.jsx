@@ -47,8 +47,8 @@ function App() {
           <Route path="/empportal" element={<EmployeePortal />} />
           <Route path="/employeeportalhome" element={<EmployeePortalHome />} />
           <Route path="/employeeprofile" element={<EmployeeProfile />} />
-          <Route path="/empportal/:email/leaves/apply" element={<ApplyLeave />} />
-          <Route path="/my" element={<EmployeeLeavesList />} />
+          <Route path="/empportal/leave/apply" element={<ApplyLeave />} />
+          <Route path="/myleaves" element={<EmployeeLeavesList />} />
 
           {/* Fallback */}
           <Route

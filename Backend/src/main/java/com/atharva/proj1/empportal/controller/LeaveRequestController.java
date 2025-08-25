@@ -22,10 +22,10 @@ public class LeaveRequestController {
     @Autowired
     private JwtUtil jwtUtil;
 
-    // ✅ 1. Apply for leave (employee)
+    //  1. Apply for leave (employee)
     @PostMapping("/apply")
     public ResponseEntity<?> applyLeave(@RequestBody EmployeeLeaveRequest leaveRequest,
-                                        @CookieValue(name = "jwt", required = false) String token) {
+                                        @CookieValue(name = "token") String token) {
         if (token == null) {
             return ResponseEntity.status(401).body(Map.of("error", "Unauthorized: No token found"));
         }
@@ -42,9 +42,9 @@ public class LeaveRequestController {
         }
     }
 
-    // ✅ 2. Get logged-in employee's leave requests
+    //  2. Get logged-in employee's leave requests
     @GetMapping("/my")
-    public ResponseEntity<?> getMyLeaves(@CookieValue(name = "jwt", required = false) String token) {
+    public ResponseEntity<?> getMyLeaves(@CookieValue(name = "token") String token) {
         if (token == null) {
             return ResponseEntity.status(401).body(Map.of("error", "Unauthorized: No token found"));
         }
