@@ -23,6 +23,7 @@ import AuthPage from "./pages/auth/AuthPage";
 
 // Common
 import Navbar from "./components/common/Navbar";
+import About from "./pages/About";
 
 function App() {
   return (
@@ -34,8 +35,9 @@ function App() {
           {/* Public Routes */}
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<AuthPage />} />
+          <Route path="/about" element={<About/>}/>
 
-          {/* Admin Routes (optional) */}
+          {/* Admin Routes  */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/employees" element={<EmployeeList />} />
           <Route path="/add" element={<AddEmployee />} />

@@ -21,7 +21,6 @@ useEffect(() => {
   const fetchProfile = async () => {
     try {
       const data = await getEmployeeProfile();  
-      
       setEmail(data.email);
       setName(formatName(data.email));
     } catch (err) {

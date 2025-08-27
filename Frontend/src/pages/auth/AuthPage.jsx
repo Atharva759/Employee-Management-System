@@ -90,7 +90,7 @@ const AuthPage = () => {
           <button
             type="button"
             onClick={() => setIsLogin(!isLogin)}
-            className="text-indigo-600 hover:underline"
+            className="text-indigo-600 hover:underline cursor-pointer"
           >
             {isLogin ? "Register here" : "Login here"}
           </button>

@@ -5,6 +5,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid,
   ResponsiveContainer
 } from 'recharts';
+import { Users, IndianRupee, Clock, TrendingUp } from "lucide-react";
 
 const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f50", "#00c49f", "#d0ed57"];
 
@@ -58,19 +59,25 @@ const Dashboard = () => {
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">📊 Employee Analytics Dashboard</h1>
+      <h1 className="text-3xl font-bold text-gray-800 mb-6 flex items-center gap-2">
+        <TrendingUp className="w-7 h-7 text-purple-600" />
+        Employee Analytics Dashboard
+      </h1>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <div className="bg-white p-6 rounded-2xl shadow-md text-center">
+          <Users className="mx-auto w-8 h-8 text-indigo-600 mb-2" />
           <h2 className="text-lg font-semibold text-gray-600">Total Employees</h2>
           <p className="text-3xl font-bold text-indigo-600">{totalEmployees}</p>
         </div>
         <div className="bg-white p-6 rounded-2xl shadow-md text-center">
+          <IndianRupee className="mx-auto w-8 h-8 text-green-600 mb-2" />
           <h2 className="text-lg font-semibold text-gray-600">Average Salary</h2>
           <p className="text-3xl font-bold text-green-600">₹{avgSalary.toFixed(2)}</p>
         </div>
         <div className="bg-white p-6 rounded-2xl shadow-md text-center col-span-2">
+          <Clock className="mx-auto w-8 h-8 text-yellow-500 mb-2" />
           <h2 className="text-lg font-semibold text-gray-600 mb-2">Recent Joins (Last 30 Days)</h2>
           <ul className="text-sm text-gray-700 list-disc list-inside h-24 overflow-y-auto">
             {recentJoins.length > 0 ? (
@@ -119,7 +126,10 @@ const Dashboard = () => {
 
       {/* Line Chart */}
       <div className="bg-white p-6 rounded-2xl shadow-md mb-10">
-        <h2 className="text-lg font-bold mb-4">Joining Trend Over Time</h2>
+        <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+          <TrendingUp className="w-6 h-6 text-orange-500" />
+          Joining Trend Over Time
+        </h2>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={trendData}>
             <CartesianGrid strokeDasharray="3 3" />

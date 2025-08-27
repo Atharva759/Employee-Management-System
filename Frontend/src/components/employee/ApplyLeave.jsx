@@ -45,89 +45,100 @@ const ApplyLeave = () => {
     }
   };
 
-  useEffect(()=>{
-
-  },[email])
+  useEffect(() => {}, [email]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-6">
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-lg space-y-6"
+        className="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-lg border border-gray-200"
       >
-        <h2 className="text-2xl font-bold text-gray-800 text-center">
-          Apply for Leave
-        </h2>
-
-        {/* Start Date */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">
-            Start Date
-          </label>
-          <input
-            type="date"
-            name="startDate"
-            value={form.startDate}
-            onChange={handleChange}
-            required
-            className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          />
+        {/* Title */}
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-extrabold text-gray-800">
+            Apply for Leave
+          </h2>
+          <p className="text-gray-500 mt-2 text-sm">
+            Fill in the form below to submit your leave request
+          </p>
         </div>
 
-        {/* End Date */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">
-            End Date
-          </label>
-          <input
-            type="date"
-            name="endDate"
-            value={form.endDate}
-            onChange={handleChange}
-            required
-            className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          />
-        </div>
+        <div className="space-y-6">
+          {/* Start Date */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">
+              Start Date
+            </label>
+            <input
+              type="date"
+              name="startDate"
+              value={form.startDate}
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+            />
+          </div>
 
-        {/* Reason */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">Reason</label>
-          <textarea
-            name="reason"
-            value={form.reason}
-            onChange={handleChange}
-            required
-            rows="4"
-            className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
-          ></textarea>
-        </div>
+          {/* End Date */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">
+              End Date
+            </label>
+            <input
+              type="date"
+              name="endDate"
+              value={form.endDate}
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+            />
+          </div>
 
-        {/* Leave Type */}
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">
-            Leave Type
-          </label>
-          <select
-            name="leaveType"
-            value={form.leaveType}
-            onChange={handleChange}
-            required
-            className="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          >
-            <option value="">Select Type</option>
-            <option value="SICK">Sick Leave</option>
-            <option value="CASUAL">Casual Leave</option>
-            <option value="EARNED">Earned Leave</option>
-          </select>
+          {/* Reason */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">
+              Reason
+            </label>
+            <textarea
+              name="reason"
+              value={form.reason}
+              onChange={handleChange}
+              required
+              rows="4"
+              placeholder="Describe your reason..."
+              className="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none transition"
+            ></textarea>
+          </div>
+
+          {/* Leave Type */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">
+              Leave Type
+            </label>
+            <select
+              name="leaveType"
+              value={form.leaveType}
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 rounded-lg p-3 text-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+            >
+              <option value="">Select Type</option>
+              <option value="SICK">Sick Leave</option>
+              <option value="CASUAL">Casual Leave</option>
+              <option value="EARNED">Earned Leave</option>
+            </select>
+          </div>
         </div>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition cursor-pointer"
-        >
-          Submit
-        </button>
+        <div className="mt-10">
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-blue-700 hover:shadow-lg transition-transform transform hover:scale-[1.02] cursor-pointer"
+          >
+            ✅ Submit Application
+          </button>
+        </div>
       </form>
     </div>
   );

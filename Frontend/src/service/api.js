@@ -51,9 +51,9 @@ export const deleteEmployee = async (id) => {
 export const applyLeave = async (leaveData) => {
   const res = await fetch(`${BACKEND_URL}/api/leaves/apply`, {
     method: "POST",
+    credentials: "include",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(leaveData),
-    credentials: "include",
   });
   if (!res.ok) throw new Error("Failed to apply leave");
   return res.json();
