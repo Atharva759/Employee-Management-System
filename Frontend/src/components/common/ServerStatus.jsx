@@ -18,7 +18,7 @@ const ServerStatus = () => {
     checkserver();
 
     
-    const interval = setInterval(checkserver, 10000);
+    const interval = setInterval(checkserver, 1000*60*60);
 
     return () => clearInterval(interval); 
   }, []);

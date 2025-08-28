@@ -1,20 +1,17 @@
-import { jwtDecode } from "jwt-decode";
 
-export const getEmailFromToken = () => {
-    const cookieString = document.cookie;
-    const token = cookieString
-        .split("; ")
-        .find((row) => row.startsWith("token="))
-        ?.split("=")[1];
+import Cookies from "js-cookie";
 
+export const getEmailFromToken = async() => {
+  const token =  Cookies.get("token");
+  if (!token) return null;
 
-    if (!token) return null;
-    try {
-        const decoded = jwtDecode(token);
-        return decoded.email || decoded.sub || null;
-    } catch (error) {
-        return null;
-    }
+  try {
+    const payload = await JSON.parse(atob(token.split(".")[1]));
+    return payload.sub || payload.email || null;
+  } catch (err) {
+    console.error("Error decoding token", err);
+    return null;
+  }
 };
 
 

@@ -21,14 +21,7 @@ const ApplyLeave = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const email = getEmailFromToken();
-    if (!email) {
-      toast.error("Not authorized. Please log in again.");
-      navigate("/register");
-      return;
-    }
-
-    const leaveData = { ...form, employeeEmail: email };
+    const leaveData = { ...form};
 
     try {
       await applyLeave(leaveData);

@@ -3,20 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { getEmployeeProfile } from "../../service/api";
 import toast from "react-hot-toast";
 import Cookies from "js-cookie";
+import getEmailFromToken from "../../util/jwtEmail";
 
-// Helper to decode JWT from cookies
-const getEmailFromToken = () => {
-  const token = Cookies.get("token");
-  if (!token) return null;
-
-  try {
-    const payload = JSON.parse(atob(token.split(".")[1]));
-    return payload.sub || payload.email || null;
-  } catch (err) {
-    console.error("Error decoding token", err);
-    return null;
-  }
-};
 
 const EmployeeProfile = () => {
   const [profile, setProfile] = useState(null);

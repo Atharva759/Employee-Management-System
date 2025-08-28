@@ -29,7 +29,6 @@ public class LeaveRequestController {
         if (token == null) {
             return ResponseEntity.status(401).body(Map.of("error", "Unauthorized: No token found"));
         }
-
         try {
             String email = jwtUtil.extractEmail(token);
             leaveRequest.setEmployeeEmail(email); // enforce employee identity
@@ -48,7 +47,6 @@ public class LeaveRequestController {
         if (token == null) {
             return ResponseEntity.status(401).body(Map.of("error", "Unauthorized: No token found"));
         }
-
         try {
             String email = jwtUtil.extractEmail(token);
             List<EmployeeLeaveRequest> leaves = leaveRequestService.getLeavesByEmployee(email);
@@ -59,6 +57,4 @@ public class LeaveRequestController {
             return ResponseEntity.status(401).body(Map.of("error", "Invalid token"));
         }
     }
-
-
 }
