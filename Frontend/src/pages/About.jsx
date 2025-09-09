@@ -9,10 +9,10 @@ const About = () => {
           About <span className="text-blue-400">EMS</span>
         </h1>
         <p className="text-lg text-gray-300 mb-12">
-          The Employee Management System (EMS) is a full-stack web application designed 
-          to simplify employee and admin operations. It provides tools for managing 
-          employee records, leave requests, and insightful analytics — ensuring 
-          smooth organizational workflows.
+          The Employee Management System (EMS) is a full-stack web application
+          designed to simplify employee and admin operations. It provides tools
+          for managing employee records, leave requests, and insightful
+          analytics — ensuring smooth organizational workflows.
         </p>
       </div>
 
@@ -43,11 +43,18 @@ const About = () => {
       <div className="max-w-5xl mt-16 text-center">
         <h2 className="text-3xl font-semibold mb-6">Tech Stack</h2>
         <p className="text-gray-300 mb-4">
-          Our EMS is built using modern technologies to ensure performance, 
+          Our EMS is built using modern technologies to ensure performance,
           scalability, and reliability.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          {["React.js", "TailwindCSS", "Spring Boot", "PostgreSQL", "JWT Auth", "REST API", ].map((tech, idx) => (
+          {[
+            "React.js",
+            "TailwindCSS",
+            "Spring Boot",
+            "PostgreSQL",
+            "JWT Auth",
+            "REST API",
+          ].map((tech, idx) => (
             <span
               key={idx}
               className="px-5 py-2 bg-blue-700/30 border border-blue-500 rounded-full text-sm text-blue-300 font-medium shadow-sm hover:bg-blue-700/50 transition"
@@ -60,7 +67,10 @@ const About = () => {
 
       {/* Footer Section */}
       <div className="mt-16 text-gray-400 text-sm text-center">
-        <p>© {new Date().getFullYear()} Employee Management System. Built with ❤️ by Atharva.</p>
+        <p>
+          © {new Date().getFullYear()} Employee Management System. Built with ❤️
+          by Atharva.
+        </p>
       </div>
     </div>
   );

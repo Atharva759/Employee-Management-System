@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import getEmailFromToken from "../../util/jwtEmail";
 
-
 const EmployeeProfile = () => {
   const [profile, setProfile] = useState(null);
   const navigate = useNavigate();

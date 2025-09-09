@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 
-import AuthPage from '../auth/AuthPage'
+import AuthPage from "../auth/AuthPage";
 
 const EmployeePortal = () => {
   return (
     <>
-    <AuthPage/>
+      <AuthPage />
     </>
-  )
-}
+  );
+};
 
-export default EmployeePortal
+export default EmployeePortal;

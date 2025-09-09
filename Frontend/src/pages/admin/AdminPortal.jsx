@@ -1,17 +1,32 @@
 import { Link } from "react-router-dom";
-import {
-  Users,
-  UserPlus,
-  BarChart3,
-  ClipboardList,
-} from "lucide-react";
+import { Users, UserPlus, BarChart3, ClipboardList } from "lucide-react";
 
 const AdminPortal = () => {
   const actions = [
-    { title: "View Employees", link: "/employees", color: "bg-gradient-to-r from-blue-500 to-blue-700", icon: Users },
-    { title: "Add Employee", link: "/add", color: "bg-gradient-to-r from-green-500 to-green-700", icon: UserPlus },
-    { title: "Dashboard", link: "/dashboard", color: "bg-gradient-to-r from-purple-500 to-purple-700", icon: BarChart3 },
-    { title: "Leave Requests", link: "/leaverequests", color: "bg-gradient-to-r from-yellow-500 to-orange-500", icon: ClipboardList },
+    {
+      title: "View Employees",
+      link: "/employees",
+      color: "bg-gradient-to-r from-blue-500 to-blue-700",
+      icon: Users,
+    },
+    {
+      title: "Add Employee",
+      link: "/add",
+      color: "bg-gradient-to-r from-green-500 to-green-700",
+      icon: UserPlus,
+    },
+    {
+      title: "Dashboard",
+      link: "/dashboard",
+      color: "bg-gradient-to-r from-purple-500 to-purple-700",
+      icon: BarChart3,
+    },
+    {
+      title: "Leave Requests",
+      link: "/leaverequests",
+      color: "bg-gradient-to-r from-yellow-500 to-orange-500",
+      icon: ClipboardList,
+    },
   ];
 
   return (

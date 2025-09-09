@@ -17,10 +17,9 @@ const ServerStatus = () => {
   useEffect(() => {
     checkserver();
 
-    
-    const interval = setInterval(checkserver, 1000*60*60);
+    const interval = setInterval(checkserver, 1000 * 60 * 60);
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, []);
 
   return (

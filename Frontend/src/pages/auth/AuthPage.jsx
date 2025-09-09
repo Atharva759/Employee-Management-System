@@ -3,39 +3,46 @@ import { useForm } from "react-hook-form";
 import { registerEmployee, loginEmployee } from "../../service/authapi";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import DummyDetails from "../../components/common/DummyDetails";
+import { FaCircleInfo } from "react-icons/fa6";
 
 const AuthPage = () => {
   const [isLogin, setIsLogin] = useState(true);
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
 
+  const toggleDummy = () => {
+    toast(() => (
+      <DummyDetails/>
+    ));
+  }
+
   const onSubmit = async (data) => {
     try {
       if (isLogin) {
-        const res = await loginEmployee(data); 
-        
-        toast.success("Logged In !",{
-          duration:3000,
-          position:"top-right",
-        })
+        const res = await loginEmployee(data);
+
+        toast.success("Logged In !", {
+          duration: 3000,
+          position: "top-right",
+        });
         navigate(`/employeeportalhome`);
       } else {
         await registerEmployee(data);
-        toast.success("Employee Registered!",{
-          duration:3000,
-          position:"top-right"
+        toast.success("Employee Registered!", {
+          duration: 3000,
+          position: "top-right",
         });
       }
       reset();
     } catch (err) {
       console.log(err);
-      toast.error("Something went wrong!",{
-        duration:3000,
-        position:"top-right",
+      toast.error("Something went wrong!", {
+        duration: 3000,
+        position: "top-right",
       });
     }
   };
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
@@ -47,7 +54,9 @@ const AuthPage = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {!isLogin && (
             <div>
-              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Name
+              </label>
               <input
                 {...register("name", { required: !isLogin })}
                 type="text"
@@ -56,9 +65,14 @@ const AuthPage = () => {
               />
             </div>
           )}
+          <button onClick={toggleDummy} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500 text-white font-medium shadow-md transition-all duration-200 hover:bg-blue-600 hover:shadow-lg active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 cursor-pointer">
+            View Dummy Login Details <FaCircleInfo className="text-white text-lg" />
+          </button>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
             <input
               {...register("email", { required: true })}
               type="email"
@@ -68,7 +82,9 @@ const AuthPage = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
             <input
               {...register("password", { required: true })}
               type="password"

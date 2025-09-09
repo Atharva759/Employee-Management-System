@@ -17,20 +17,20 @@ const EmployeePortalHome = () => {
       .replace(/\b\w/g, (char) => char.toUpperCase());
   };
 
-useEffect(() => {
-  const fetchProfile = async () => {
-    try {
-      const data = await getEmployeeProfile();  
-      setEmail(data.email);
-      setName(formatName(data.email));
-    } catch (err) {
-      console.error("Unauthorized or error fetching profile:", err);
-      navigate("/login"); 
-    }
-  };
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const data = await getEmployeeProfile();
+        setEmail(data.email);
+        setName(formatName(data.email));
+      } catch (err) {
+        console.error("Unauthorized or error fetching profile:", err);
+        navigate("/login");
+      }
+    };
 
-  fetchProfile();
-}, [navigate]);
+    fetchProfile();
+  }, [navigate]);
 
   const handleLogout = () => {
     Cookies.remove("token");

@@ -35,7 +35,10 @@ const EmployeeForm = ({
   const InputField = ({ icon: Icon, error, ...props }) => (
     <div>
       <div className="relative">
-        <Icon className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+        <Icon
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+          size={18}
+        />
         <input
           {...props}
           className="w-full pl-10 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -58,7 +61,10 @@ const EmployeeForm = ({
               Employee ID
             </label>
             <div className="relative">
-              <Hash className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+              <Hash
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                size={18}
+              />
               <input
                 {...register("id")}
                 value={employee.id}
@@ -118,9 +124,14 @@ const EmployeeForm = ({
             Joining Date
           </label>
           <div className="relative">
-            <CalendarDays className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+            <CalendarDays
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+              size={18}
+            />
             <input
-              {...register("joiningDate", { required: "Joining Date is required" })}
+              {...register("joiningDate", {
+                required: "Joining Date is required",
+              })}
               type="date"
               className="w-full pl-10 p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             />

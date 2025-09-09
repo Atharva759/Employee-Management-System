@@ -21,7 +21,7 @@ const ApplyLeave = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const leaveData = { ...form};
+    const leaveData = { ...form };
 
     try {
       await applyLeave(leaveData);

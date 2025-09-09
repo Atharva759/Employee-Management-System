@@ -9,13 +9,13 @@ const EmployeeList = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("");
 
-  const departmentOptions = [...new Set(employees.map((emp) => emp.department))];
+  const departmentOptions = [
+    ...new Set(employees.map((emp) => emp.department)),
+  ];
 
   const showdata = () => {
     getEmployees().then((employees) => {
-      const sorteddata = employees.sort((a, b) =>
-        a.name.localeCompare(b.name)
-      );
+      const sorteddata = employees.sort((a, b) => a.name.localeCompare(b.name));
       setEmployees(sorteddata);
     });
   };

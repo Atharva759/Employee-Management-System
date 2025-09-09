@@ -22,7 +22,6 @@ const EmployeeLeavesList = () => {
     if (email) fetchLeaveData();
   }, [email]);
 
-  
   const statusBg = {
     APPROVED: "bg-green-50 border-green-200",
     PENDING: "bg-yellow-50 border-yellow-200",

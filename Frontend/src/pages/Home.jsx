@@ -6,7 +6,6 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] text-white flex items-center">
       <section className="flex flex-col-reverse md:flex-row items-center justify-between max-w-7xl mx-auto px-6 py-16 gap-12 w-full">
-        
         {/* Left Text Section */}
         <motion.div
           initial={{ opacity: 0, x: -80 }}
@@ -18,11 +17,10 @@ const Home = () => {
             Welcome to <span className="text-blue-400">EMS</span>
           </h1>
           <p className="text-lg text-gray-300 mb-8 max-w-lg">
-            Manage your employees with ease. Track records, analyze insights, and
-            streamline operations — all in one place.
+            Manage your employees with ease. Track records, analyze insights,
+            and streamline operations — all in one place.
           </p>
 
-          
           <div className="flex gap-4">
             <Link
               to="/adminportal"
@@ -39,7 +37,6 @@ const Home = () => {
           </div>
         </motion.div>
 
-        
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
